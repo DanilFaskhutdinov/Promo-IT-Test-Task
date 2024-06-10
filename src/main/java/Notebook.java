@@ -59,7 +59,6 @@ public class Notebook {
      */
     private static void commandFind(String searchDate) {
         BufferedReader notesReader;
-        Scanner in = new Scanner(System.in);
 
         try {
             notesReader = new BufferedReader(new FileReader(NOTES_PATH));
@@ -81,7 +80,7 @@ public class Notebook {
     }
 
     /**
-     * Выводит статистику
+     * Выводит общее количестов записей, количество символов в записях и самый активный день
      */
     private static void commandStats() {
         BufferedReader notesReader;
@@ -99,7 +98,7 @@ public class Notebook {
             while (notesReader.ready()) {
                 String tempNote = notesReader.readLine();
                 String[] splitedNote = tempNote.split(" ", 2);
-                int dayStat = (int) daysStats.getOrDefault(splitedNote[0], 0);
+                int dayStat = daysStats.getOrDefault(splitedNote[0], 0);
                 daysStats.put(splitedNote[0], ++dayStat);
                 notesQuantity++;
                 charsQuantity += splitedNote.length > 1 ? splitedNote[1].length() : 0;
@@ -149,7 +148,7 @@ public class Notebook {
                     System.out.println("#read - Выводит все записи");
                     System.out.println("#write - Позволяет сделать новую запись");
                     System.out.println("#find - Позволяет найти запись за определённую дату");
-                    System.out.println("#statistics или #stats - Выводит статистику(ко)");
+                    System.out.println("#statistics или #stats - Выводит статистику(количестов записей, количество символов, самый активный день)");
                     System.out.println("#exit - Закрывает приложение");
                     break;
                 default:
